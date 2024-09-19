@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camera Test</title>
+</head>
+<body>
+  <h1>Camera Test</h1>
+  <video id="video" width="320" height="240" autoplay></video>
+
+  <script>
+    const video = document.getElementById('video');
+
+    // Check if getUserMedia is supported and access the camera
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+          video.srcObject = stream;
+          console.log("Camera stream started.");
+        })
+        .catch(function(err) {
+          console.error("Error accessing camera: ", err);
+          alert("Error accessing the camera: " + err.message);
+        });
+    } else {
+      alert("Your browser does not support camera access.");
+      console.error("getUserMedia not supported in this browser.");
+    }
+  </script>
+</body>
+</html>
